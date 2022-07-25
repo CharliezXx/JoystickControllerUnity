@@ -23,7 +23,7 @@ public class MCC : MonoBehaviour
 
     void Start()
     {
-        moveSpeed = .1f;
+        moveSpeed = .15f;
         gravity = .5f;
         GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
         meshPlayer = tempPlayer.transform.GetChild(0);
@@ -35,18 +35,31 @@ public class MCC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //inputX = Input.GetAxis("Horizontal");
         //inputZ = Input.GetAxis("Vertical");
         inputX = _mngJoystick.inputHorizontal();
         inputZ = _mngJoystick.inputVertical();
-        if (inputX == 0 && inputZ == 0)
+        
+        //run
+        if (inputX + inputZ < -.8f || inputX + inputZ > .8f||inputX < -.4f || inputZ > .6f || inputX > .4f || inputZ < -.6f || inputX + inputZ <= -.8f || inputX + inputZ >= .8f)
         {
-            _animator.SetBool("isRun", false);
+            if (inputX != 0 && inputZ != 0) { _animator.SetBool("isRun", true); _animator.SetBool("isWalk", false); }
+            //idle
+            else { _animator.SetBool("isRun", false); _animator.SetBool("isWalk", false); }
+
         }
-        else
+        // Walk
+        else if(inputX + inputZ >= -.8f || inputX + inputZ <= .8f)
         {
-            _animator.SetBool("isRun", true);
+            if (inputX != 0 && inputZ != 0) { _animator.SetBool("isWalk", true); _animator.SetBool("isRun", false); }
+            //idle
+            else { _animator.SetBool("isRun", false); _animator.SetBool("isWalk", false); }
         }
+        
+        Debug.Log("========"+inputX + inputZ);
+        Debug.Log("X " + inputX);
+        Debug.Log("Z " + inputZ);
     }
 
     private void FixedUpdate()

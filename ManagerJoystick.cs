@@ -27,7 +27,7 @@ private Vector2 posInput;
             {
                 posInput.x = posInput.x / (imgJoystickBG.rectTransform.sizeDelta.x);
                 posInput.y = posInput.y / (imgJoystickBG.rectTransform.sizeDelta.y);
-                Debug.Log(posInput.x.ToString() + "/" +  posInput.y.ToString());
+                //Debug.Log(posInput.x.ToString() + "/" +  posInput.y.ToString());
 
                 // แก้จอย Joystick ลอยเกิน JoystickBG
                 if (posInput.magnitude > 1.0f){
@@ -36,8 +36,8 @@ private Vector2 posInput;
 
                 // ขยับ Joystick
                 imgJoystick.rectTransform.anchoredPosition = new Vector2(
-                    posInput.x * (imgJoystickBG.rectTransform.sizeDelta.x /3), 
-                    posInput.y * (imgJoystickBG.rectTransform.sizeDelta.y /3));
+                    posInput.x * (imgJoystickBG.rectTransform.sizeDelta.x /4), 
+                    posInput.y * (imgJoystickBG.rectTransform.sizeDelta.y /4));
             }
     }
 
